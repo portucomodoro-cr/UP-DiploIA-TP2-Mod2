@@ -13,10 +13,10 @@ El conjunto de datos utilizado se encuentra en el archivo:
 
 smoking_prediction.xlsx
 
-ubicado en la carpeta TP2\data\raw
+ubicado en la carpeta \data\raw
 
 
-La variable objetivo del problema es:
+La variable objetivo del conjunto de datos es:
 
 smoking
 
@@ -74,6 +74,27 @@ Optuna (version 5.0.0)
 SHAP 0.54.1 slicer-0.0.8
 
 
+Lectura y descubrimiento de datos:
+
+Luego de la verificacion de datos contenidos en el conjunto de datos, se observan muchas variabes con distribuciones muy asimétricas:
+
+Gtp
+LDL
+HDL
+triglyceride
+
+
+Análisis exploratorio de Datos (EDA):
+
+En esta etapa, mediante la interpretación de distintos tipos de gráficos, obtuve algunos datos de interes.
+1 - El 36,7% de los integrantes en este conjunto de datos, son fumadores.
+2 - Solo el 4,27% de las mujeres del conjunto de datos, fuman.
+3 - Mientras que el porcentaje de hombres fumadores es del 55,2% (mas de la mitad de los hombres de la muestra son fumadores)
+4 - A partir de los 76 kg de peso, se equilibra cantidad de fumadores y no fumadores. Suena lógico en base al punto anterior.
+5 - De las personas con valores de la encima Gtp, superiores a 1,71 , la mayoría son fumadores.
+6 - De los individuos con valores de triglicéridos superiores a 7,8 , hay mas cantidad de fumadores que no fumadores.
+
+
 Preprocesamiento:
 
 Las etapas de preparación de datos incluyeron:
@@ -89,16 +110,9 @@ Modelos Implementados
 Arbol de decisión 
 (abraviado durante el código como dtc)
 
+
 Random Forest 
 (abraviado durante el código como rf)
-
-Modelo basado en múltiples árboles de decisión entrenados mediante la técnica de Bagging.
-
-Ventajas:
-
-Captura relaciones no lineales.
-Robusto frente al ruido.
-Permite obtener importancia de variables.
 
 Parámetros utilizados para el modelo:
 
@@ -111,26 +125,18 @@ min_samples_leaf =300
 XGBoost
 (abraviado durante el código como xgb)
 
-Modelo basado en Gradient Boosting optimizado para alto rendimiento.
-
-Ventajas:
-
-Excelente capacidad predictiva.
-Manejo eficiente de relaciones complejas.
-Amplias posibilidades de optimización.
-Optimización de Hiperparámetros
-La búsqueda de hiperparámetros fue realizada mediante Optuna.
-
-Algunos parámetros optimizados:
+Parámetros utilizados para el modelo:
 
 n_estimators = 300
 max_depth = 3
 learning_rate = 0.02
 
+Se realizó búsqueda de hiperparámetros mediante Optuna, sin obtener mejoras respecto a los parametros probados manualmente.
+Estas pruebas de mejoras de hiperparametros, pueden verse en la notebook Nro. 7 (Pruebas Optuna XGB)
 
 
 
-Evaluación
+Evaluación:
 
 Los modelos fueron evaluados utilizando métricas de clasificación:
 
@@ -138,27 +144,27 @@ Accuracy
 Precision
 Recall
 F1-Score
-ROC-AUC
 
-Interpretabilidad
+
+Interpretabilidad:
 
 Para comprender el comportamiento de los modelos se utilizaron:
 
-Feature Importance
+Importancia Relativa de Atributos
 
 Permite identificar cuáles son las variables que más influyen en la predicción.
+
 
 SHAP (SHapley Additive exPlanations)
 
 Permite conocer:
 
 Impacto global de cada variable.
-
 Impacto local sobre cada predicción.
-
 Relaciones entre variables y probabilidad de tabaquismo.
 
-Estructura del Proyecto
+
+Estructura del Proyecto:
 
 proyecto/
 
